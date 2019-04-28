@@ -5,7 +5,7 @@ const path = require('path');
 const app = express();
 
 const { getHomePage } = require('./routes/index.ejs');
-const { getRepoFromGitHub } = require('./routes/repositories');
+const { getRepoFromGitHub, infoRepoPage } = require('./routes/repositories');
 
 const port = 5000;
 
@@ -38,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public'))); // configure express to
 // routes for the app
 app.get('/', getHomePage);
 app.get('/getRepositories', getRepoFromGitHub);
+app.get('/info/:owner/:repo/:repoId', infoRepoPage);
 
 // set the app to listen on the port
 app.listen(port, () => {

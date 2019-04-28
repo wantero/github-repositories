@@ -1,7 +1,7 @@
 class Repository {
 
     constructor(
-        id, node_id, name, full_name, is_private, description, language, owner
+        id, node_id, name, full_name, is_private, description, language, owner, stars, forks, clone_url
     ) {
         this.id = id;
         this.node_id = node_id;
@@ -11,6 +11,9 @@ class Repository {
         this.description = description;
         this.language = language;
         this.owner = owner;
+        this.stars = stars;
+        this.forks = forks;
+        this.clone_url = clone_url;
     }
 }
 

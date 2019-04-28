@@ -1,6 +1,6 @@
 module.exports = {
     getHomePage: (req, res) => {
-        let query = "SELECT * FROM `repositories` ORDER BY id ASC"; // query database to get all the repositories
+        let query = "SELECT * FROM repositories ORDER BY stars DESC";
 
         // execute query
         db.query(query, (err, result) => {

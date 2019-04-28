@@ -1,0 +1,79 @@
+<% include partials/header.ejs %>
+<div class="container">
+    <% if (message) { %>
+    <p class="text-center text-danger"><%= message %></p>
+    <% } %>
+
+    <% if (repository) { %>
+    <form>
+        <div class="form-group">
+            <label for="repoName">Name</label>
+            <input type="text" class="form-control" id="repoName" value="<%= repository.name %>" disabled>
+        </div>
+        <div class="form-group">
+            <label for="repoFullName">Full Name</label>
+            <input type="text" class="form-control" id="repoFullName" value="<%= repository.full_name %>" disabled>
+        </div>        
+        <div class="form-group">
+            <label for="repoDescription">Description</label>
+            <textarea class="form-control" id="repoDescription" rows="3" disabled><%= repository.description %></textarea>
+        </div>        
+        <div class="form-group">
+            <label for="repoOwner">Owner</label>
+            <input type="text" class="form-control" id="repoOwner" value="<%= repository.owner %>" disabled>
+        </div>        
+        <div class="form-group">
+            <label for="repoLanguage">Language</label>
+            <input type="text" class="form-control" id="repoLanguage" value="<%= repository.language %>" disabled>
+        </div>        
+        <div class="form-group">
+            <label for="repoStars">Stars</label>
+            <input type="text" class="form-control" id="repoStars" value="<%= repository.stars %>" disabled>
+        </div>                
+        <div class="form-group">
+            <label for="repoForks">Forks</label>
+            <input type="text" class="form-control" id="repoForks" value="<%= repository.forks %>" disabled>
+        </div>
+        <div class="form-group">
+            <label for="repoCloneUrl">Clone URL</label>
+            <div class="input-group input-group-copy">            
+                <input type="text" class="form-control" id="repoCloneUrl" value="<%= repository.clone_url %>" disabled>            
+                <button onclick="copyCloneUrl()" class="btn btn-default">Copy</button>            
+            </div>            
+        </div>        
+    </form>
+    <% } %>
+
+    <% if (contributors) { %>
+    <h1>Contributors</h1>
+    <div class="container">
+        <div class="row">
+            <% contributors.forEach((contributor, index) => { %>
+            <div class="card" style="width:250px; margin-left: 10px; margin-bottom: 10px">
+                <img class="card-img-top" src="<%= contributor.avatar_url %>" alt="Card image" style="width:100%">
+                <div class="card-body">
+                    <h4 class="card-title"><%= contributor.login %></h4>
+                    <p class="card-text">Contribuitions: <%= contributor.contributions %></p>
+                    <a href="<%= contributor.html_url %>" class="btn btn-primary" target="_blank">See Profile</a>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+    <% } %>
+
+</div>
+</div>
+</body>
+
+<script>
+function copyCloneUrl() {
+    var copyText = document.getElementById("repoCloneUrl");
+    copyText.select();
+    document.execCommand("copy");
+    alert("Copied the text: " + copyText.value);
+
+}
+</script>
+
+</html>

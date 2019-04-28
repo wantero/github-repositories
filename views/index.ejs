@@ -10,6 +10,7 @@
                         <th scope="col">Description</th>
                         <th scope="col">Owner</th>
                         <th scope="col">Language</th>
+                        <th scope="col">Stars</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -22,6 +23,7 @@
                             <td><%= repository.description %></td>
                             <td><%= repository.owner %></td>
                             <td><%= repository.language %></td>
+                            <td><%= repository.stars %></td>
                             <td>
                                 <a href="/info/<%= repository.owner %>/<%= repository.name %>/<%= repository.id %>"  class="btn btn-sm btn-info">Info</a>
                             </td>
