@@ -1,0 +1,16 @@
+module.exports = {
+    getHomePage: (req, res) => {
+        let query = "SELECT * FROM `repositories` ORDER BY id ASC"; // query database to get all the repositories
+
+        // execute query
+        db.query(query, (err, result) => {
+            if (err) {
+                res.redirect('/');
+            }
+            res.render('index.ejs', {
+                title: "GitHub Repositories | View Repositories"
+                ,repositories: result
+            });
+        });
+    },
+};

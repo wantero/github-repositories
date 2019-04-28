@@ -1,0 +1,38 @@
+<% include partials/header.ejs %>
+    <div class="table-wrapper">
+        <% if (repositories.length > 0) {%>
+            <table class="table table-hovered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Owner</th>
+                        <th scope="col">Language</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% repositories.forEach((repository, index) => { %>
+                        <tr>
+                            <th scope="row"><%= repository.id %></th>
+                            <td><%= repository.name %></td>
+                            <td><%= repository.full_name %></td>
+                            <td><%= repository.description %></td>
+                            <td><%= repository.owner %></td>
+                            <td><%= repository.language %></td>
+                            <td>
+                                <a href="/info/<%= repository.owner %>/<%= repository.name %>/<%= repository.id %>"  class="btn btn-sm btn-info">Info</a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p class="text-center">No repositories found. Go <a href="/getRepositories" >here</a> to get repositories from GitHub.</p>
+        <% } %>
+    </div>
+</div>
+</body>
+</html>
