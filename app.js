@@ -7,7 +7,7 @@ const app = express();
 const { getHomePage } = require('./routes/index.ejs');
 const { getRepoFromGitHub, infoRepoPage } = require('./routes/repositories');
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 // create connection to database
 // the mysql.createConnection function takes in a configuration object which contains host, user, password and the database name.
