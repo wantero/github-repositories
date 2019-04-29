@@ -33,8 +33,6 @@ module.exports = {
                                                         repo.stargazers_count,
                                                         repo.forks,
                                                         repo.clone_url);
-                            console.log(myRepository);
-                            // console.log(Object.values(myRepository));
                             let query = 'INSERT INTO repositories SET ?';
                             db.query(query, myRepository, (err, result) => {
                                 if (err) {
@@ -60,9 +58,6 @@ module.exports = {
         let repository = new Array();
         let resultAux = new Array();
         let query;
-
-        console.log(owner);
-        console.log(repo);
 
         query = "SELECT * FROM `repositories` WHERE id = " + repoId;
 
@@ -90,7 +85,7 @@ module.exports = {
         });        
 
         query = "SELECT * FROM `contributors` WHERE repoId = " + repoId;
-        console.log(query);
+        
         db.query(query, (err, result) => {
 
             if (result[0]) {
