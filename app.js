@@ -57,6 +57,12 @@ app.get('/', getHomePage);
 app.get('/getRepositories', getRepoFromGitHub);
 app.get('/info/:owner/:repo/:repoId', infoRepoPage);
 
+// more middleware (executes after routes)
+app.use(function(req, res, next) {});
+// error handling middleware
+app.use(function(err, req, res, next) {});
+
+
 // set the app to listen on the port
 app.listen(port, () => {
     console.log(`Server running on port: ${port}`);
