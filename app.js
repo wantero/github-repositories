@@ -30,30 +30,6 @@ function handleDisconnect() {
         console.log('Connected to database');
 
         global.db = connection;
-
-        // configure middleware
-        app.set('port', process.env.port || port); // set express to use this port
-        app.set('views', __dirname + '/views'); // set express to look in this folder to render our view
-        app.set('view engine', 'ejs'); // configure template engine
-        app.use(bodyParser.urlencoded({ extended: false }));
-        app.use(bodyParser.json()); // parse form data client
-        app.use(express.static(path.join(__dirname, 'public'))); // configure express to use public folder
-        
-        // routes for the app
-        app.get('/', getHomePage);
-        app.get('/getRepositories', getRepoFromGitHub);
-        app.get('/info/:owner/:repo/:repoId', infoRepoPage);
-        
-        // more middleware (executes after routes)
-        app.use(function(req, res, next) {});
-        // error handling middleware
-        app.use(function(err, req, res, next) {});
-        
-        
-        // set the app to listen on the port
-        app.listen(port, () => {
-            console.log(`Server running on port: ${port}`);
-        });
         
     });                                     // process asynchronous requests in the meantime.
     // If you're also serving http, display a 503 error.
@@ -68,3 +44,27 @@ function handleDisconnect() {
 }
 
 handleDisconnect();
+
+// configure middleware
+app.set('port', process.env.port || port); // set express to use this port
+app.set('views', __dirname + '/views'); // set express to look in this folder to render our view
+app.set('view engine', 'ejs'); // configure template engine
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json()); // parse form data client
+app.use(express.static(path.join(__dirname, 'public'))); // configure express to use public folder
+
+// routes for the app
+app.get('/', getHomePage);
+app.get('/getRepositories', getRepoFromGitHub);
+app.get('/info/:owner/:repo/:repoId', infoRepoPage);
+
+// more middleware (executes after routes)
+app.use(function(req, res, next) {});
+// error handling middleware
+app.use(function(err, req, res, next) {});
+
+
+// set the app to listen on the port
+app.listen(port, () => {
+    console.log(`Server running on port: ${port}`);
+});
