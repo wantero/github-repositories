@@ -5,6 +5,8 @@ const Contributors = require('../classes/contributors');
 module.exports = {
     getRepoFromGitHub: (req, res) => {
 
+        let errorMessage = '';
+
         db.query("DELETE FROM repositories", (err, result) => {
             if (err) {
                 return res.status(500).send(err);
@@ -36,18 +38,26 @@ module.exports = {
                             let query = 'INSERT INTO repositories SET ?';
                             db.query(query, myRepository, (err, result) => {
                                 if (err) {
-                                    console.log(err);
+                                    // console.log(err);
                                 }                        
                             })
                         })
                     })
                     .catch(error => {
-                        console.log(error);
+                        errorMessage = error.response.data.message;
                     });
                 });
 
                 Promise.all(requests).then(() => {
-                    res.redirect('/');
+                    if (errorMessage) {
+                        res.render('index.ejs', {
+                            title: "GitHub Repositories | View Repositories"
+                            ,repositories: ''
+                            ,message: errorMessage
+                        });
+                    } else {
+                        res.redirect('/');
+                    }                    
                   });                
             });                   
         });

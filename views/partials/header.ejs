@@ -88,12 +88,15 @@
         }
     }
 </style>
-    
+
 <script>
     function getRepo() {
         document.getElementById("loader").style.display = "block";
         document.getElementById("page-wrapper").style.display = "none";
-        window.location.href = window.location.href + 'getRepositories'
+        repoLocation = window.location.port ?
+            window.location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/getRepositories' :
+            window.location.protocol + '//' + window.location.hostname + '/getRepositories';
+        window.location.href = repoLocation;
     }
 </script>
 
@@ -102,5 +105,6 @@
         <nav class="navbar navbar-light bg-light">
             <span class="navbar-brand mb-0 h1"><a href="/">GitHub Repositories</a></span>
             <!--a class="float-right" href="/getRepositories" title="Get Repositories From GitHub">Get Repositories</a-->
-            <button type="button" class="btn btn-outline-primary" onclick="javascript:getRepo();">Get Repositories</button>
+            <button type="button" class="btn btn-outline-primary" onclick="javascript:getRepo();">Get
+                Repositories</button>
         </nav>

@@ -1,6 +1,10 @@
 <div id="loader"></div>
 
 <% include partials/header.ejs %>
+    <% if (message) { %>
+    <p class="text-center text-danger"><%= message %></p>
+    <% } %>
+
     <div class="table-wrapper">
         <% if (repositories && repositories.length > 0) {%>
             <table class="table table-hovered">
