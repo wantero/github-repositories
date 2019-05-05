@@ -1,3 +1,5 @@
+<div id="loader"></div>
+
 <% include partials/header.ejs %>
     <div class="table-wrapper">
         <% if (repositories && repositories.length > 0) {%>
@@ -32,7 +34,7 @@
                 </tbody>
             </table>
         <% } else { %>
-            <p class="text-center">No repositories found. Go <a href="/getRepositories" >here</a> to get repositories from GitHub.</p>
+            <p class="text-center">No repositories found. Go <button type="button" class="btn btn-outline-primary btn-sm" onclick="javascript:getRepo();">here</button> to get repositories from GitHub.</p>
         <% } %>
     </div>
 </div>
