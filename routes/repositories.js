@@ -17,10 +17,10 @@ module.exports = {
                 //Requisições para 5 linguagens fixo, pode ter refactory para receber via param e processar individualmente
                 let myLanguages = new Array('javascript','java','python','r','go');
 
-                myLanguages.map(language => {
-                    axios.get('https://api.github.com/search/repositories?q=language:' + language + '&sort=stars&order=desc')
+                const requests = myLanguages.map(language => {
+                    return axios.get('https://api.github.com/search/repositories?q=language:' + language + '&sort=stars&order=desc')
                     .then(response => {
-        
+
                         const insert = response.data.items.map(repo => {
                             let myRepository = new repository(repo.id,
                                                         repo.node_id,
@@ -36,17 +36,19 @@ module.exports = {
                             let query = 'INSERT INTO repositories SET ?';
                             db.query(query, myRepository, (err, result) => {
                                 if (err) {
-                                    //return res.status(500).send(err);
                                     console.log(err);
                                 }                        
                             })
                         })
-                        res.redirect('/');
                     })
                     .catch(error => {
                         console.log(error);
                     });
                 });
+
+                Promise.all(requests).then(() => {
+                    res.redirect('/');
+                  });                
             });                   
         });
     },
